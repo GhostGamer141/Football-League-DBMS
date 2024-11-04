@@ -1,0 +1,39 @@
+<!-- Place this in public/dashboard.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Football League DBMS - Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="navbar">
+    <div>Dashboard</div>
+    <div>
+        <a href="/logout">Logout</a>
+    </div>
+</div>
+<div class="content">
+    <div class="card">
+        <h2>Database Tables</h2>
+        <ul class="table-list" id="tableList">
+            <!-- Tables will be dynamically inserted here -->
+        </ul>
+    </div>
+</div>
+<script>
+    // Fetch and display tables
+    fetch('/api/tables')
+        .then(response => response.json())
+        .then(tables => {
+            const tableList = document.getElementById('tableList');
+            tables.forEach(table => {
+                const li = document.createElement('li');
+                li.className = 'table-item';
+                li.textContent = table;
+                tableList.appendChild(li);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+</script>
+</body>
+</html>
