@@ -5,12 +5,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Database {
+    // Connection details
     private static final String URL = "jdbc:mysql://localhost:3306/football_league_dbms";
     private static final String USER = "root";
-    private static final String PASSWORD = "C3a#palmavenuegm";
+    private static final String PASSWORD = "root123";
 
+    // Method to establish and return a connection to the database
     public static Connection getConnection() throws SQLException {
-        System.out.println("attempting connection...");
+        System.out.println("Attempting to connect to the database...");
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
