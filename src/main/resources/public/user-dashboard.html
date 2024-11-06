@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/css/user-dashboard.css">
+</head>
+<body>
+<h1>User Dashboard</h1>
+<div id="userData"></div>
+<a href="/logout">Logout</a>
+<script>
+    fetch('/api/user-data')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('userData').innerHTML =
+                '<h2>Your Information</h2>' +
+                `<p>Username: ${data.username}</p>` +
+                `<p>Last Login: ${new Date(data.lastLogin).toLocaleString()}</p>`;
+        });
+</script>
+</body>
+</html>

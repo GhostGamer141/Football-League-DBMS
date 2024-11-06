@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body >
+<h1>Admin Dashboard</h1>
+<div id="tables"></div>
+<a href="/logout">Logout</a>
+<div class="card">
+    <form action="/add-match" method="POST">
+        <div class="form-group">
+            <label>Match ID:</label>
+            <input type="number" name="matchID" required>
+        </div>
+        <div class="form-group">
+            <label>Match Date:</label>
+            <input type="date" name="matchDate" required>
+        </div>
+        <div class="form-group">
+            <label>Match Time:</label>
+            <input type="time" name="matchTime" required>
+        </div>
+        <div class="form-group">
+            <label>Home Team:</label>
+            <input type="text" name="homeTeam" required>
+        </div>
+        <div class="form-group">
+            <label>Away Team:</label>
+            <input type="text" name="awayTeam" required>
+        </div>
+        <div class="form-group">
+            <label>Home Team Goals:</label>
+            <input type="number" name="homeTeamGoals" required>
+        </div>
+        <div class="form-group">
+            <label>Away Team Goals:</label>
+            <input type="number" name="awayTeamGoals" required>
+        </div>
+        <button type="submit">Add Match</button>
+    </form>
+</div>
+<div class="update-match">
+    <form action="/update-match" method="POST">
+        <div class="form-group">
+            <label>Match ID:</label>
+            <input type="number" name="matchID" required>
+        </div>
+        <div class="form-group">
+            <label>Match Date:</label>
+            <input type="date" name="matchDate" required>
+        </div>
+        <div class="form-group">
+            <label>Match Time:</label>
+            <input type="time" name="matchTime" required>
+        </div>
+        <div class="form-group">
+            <label>Home Team:</label>
+            <input type="text" name="homeTeam" required>
+        </div>
+        <div class="form-group">
+            <label>Away Team:</label>
+            <input type="text" name="awayTeam" required>
+        </div>
+        <div class="form-group">
+            <label>Home Team Goals:</label>
+            <input type="number" name="homeTeamGoals" required>
+        </div>
+        <div class="form-group">
+            <label>Away Team Goals:</label>
+            <input type="number" name="awayTeamGoals" required>
+        </div>
+        <button type="submit">Update Match</button>
+    </form>
+</div>
+<div class="update-team">
+    <form action="/update-team" method="POST">
+        <div class="form-group">
+            <label>Team Name:</label>
+            <input type="text" name="teamName" required>
+        </div>
+        <div class="form-group">
+            <label>Team Manager:</label>
+            <input type="text" name="teamManager" required>
+        </div>
+        </form>
+</div>
+<div class="update-teamStats">blah blah </div>
+
+
+
+<script>
+    fetch('/api/tables')
+        .then(response => response.json())
+        .then(tables => {
+            document.getElementById('tables').innerHTML =
+                '<h2>Database Tables</h2>' +
+                '<ul>' +
+                tables.map(table => `<li>${table}</li>`).join('') +
+                '</ul>';
+        });
+</script>
+</body>
+</html>
