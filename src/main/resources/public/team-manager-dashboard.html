@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Football League DBMS - Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .dashboard-button {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            transition: background-color 0.3s;
+        }
+
+        .dashboard-button:hover {
+            background-color: #45a049;
+        }
+
+        .dashboard-button h2 {
+            margin: 0;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <button class="dashboard-button" onclick="window.location.href='/update-contract.html'">
+        <h2>Update Contracts</h2>
+    </button>
+</div>
+<div class="login-container">
+    <button class="dashboard-button" onclick="window.location.href='/update-staff.html'">
+        <h2>Update Staff Data</h2>
+    </button>
+</div>
+
+<div class="login-container">
+    <button class="dashboard-button" onclick="window.location.href='/add-player.html'">
+        <h2>Add Player</h2>
+    </button>
+</div>
+<div class="login-container">
+    <button class="dashboard-button" onclick="window.location.href='/update-player.html'">
+        <h2>Update Player Data</h2>
+    </button>
+</div>
+<div class="login-container">
+    <button class="dashboard-button" onclick="window.location.href='/update-player-stats.html'">
+        <h2>Update Player Statistics</h2>
+    </button>
+</div>
+<div class="button-container">
+    <button class="back-button" onclick="window.location.href='/dashboard.html'">Back to Main Dashboard</button>
+</div>
+</body>
+</html>

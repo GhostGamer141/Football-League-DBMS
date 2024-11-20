@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Team Staff</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"], input[type="number"], input[type="date"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<h1>Update Team Staff</h1>
+<form id="update-team-staff-form">
+    <label for="staffId">Staff ID</label>
+    <input type="number" id="staffId" name="staffId" required>
+
+    <label for="teamId">Team ID</label>
+    <input type="number" id="teamId" name="teamId">
+
+    <label for="contractId">Contract ID</label>
+    <input type="number" id="contractId" name="contractId">
+
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="role">Role</label>
+    <input type="text" id="role" name="role">
+
+    <label for="nationality">Nationality</label>
+    <input type="text" id="nationality" name="nationality">
+
+    <label for="dob">Date of Birth</label>
+    <input type="date" id="dob" name="dob">
+
+    <input type="submit" value="Update Team Staff">
+</form>
+<div class="message" id="message"></div>
+
+<script>
+    document.getElementById('update-team-staff-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const teamStaffData = {
+            staffId: parseInt(document.getElementById('staffId').value),
+            teamId: document.getElementById('teamId').value ? parseInt(document.getElementById('teamId').value) : null,
+            contractId: document.getElementById('contractId').value ? parseInt(document.getElementById('contractId').value) : null,
+            name: document.getElementById('name').value,
+            role: document.getElementById('role').value || null,
+            nationality: document.getElementById('nationality').value || null,
+            dob: document.getElementById('dob').value || null
+        };
+
+        try {
+            const response = await fetch('/update-team-staff', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(teamStaffData)
+            });
+
+            const result = await response.json();
+            const messageDiv = document.getElementById('message');
+            if (response.ok) {
+                messageDiv.style.color = 'green';
+                messageDiv.textContent = result.message;
+            } else {
+                messageDiv.style.color = 'red';
+                messageDiv.textContent = result.error || 'An error occurred while updating the team staff.';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+</script>
+</body>
+</html>

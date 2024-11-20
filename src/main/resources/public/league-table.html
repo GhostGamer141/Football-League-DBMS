@@ -1,30 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>League Table</title>
+    <title>Football League DBMS - League Table</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .league-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .league-table th,
+        .league-table td {
+            text-align: center;
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+
+        .league-table th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        .league-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .league-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .league-table .team-name {
+            text-align: left;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .back-button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-<h1>League Table</h1>
-<table border="1">
-    <thead>
-    <tr>
-        <th>Position</th>
-        <th>Team Name</th>
-        <th>Played</th>
-        <th>Won</th>
-        <th>Drawn</th>
-        <th>Lost</th>
-        <th>Points</th>
-        <th>Goal Difference</th>
-    </tr>
-    </thead>
-    <tbody id="table-body">
-    <!-- Rows will be dynamically generated here -->
-    </tbody>
-</table>
+<div class="container">
+    <h1>League Table</h1>
+    <table class="league-table">
+        <thead>
+        <tr>
+            <th>Position</th>
+            <th>Team Name</th>
+            <th>Played</th>
+            <th>Won</th>
+            <th>Drawn</th>
+            <th>Lost</th>
+            <th>Points</th>
+            <th>Goal Difference</th>
+        </tr>
+        </thead>
+        <tbody id="table-body">
+        <!-- Rows will be dynamically generated here -->
+        </tbody>
+    </table>
+    <div class="button-container">
+        <button class="back-button" onclick="window.location.href='/user-dashboard.html'">Back to User Dashboard</button>
+    </div>
+    <div class="button-container">
+        <button class="back-button" onclick="window.location.href='/dashboard.html'">Back to Main Dashboard</button>
+    </div>
+</div>
 
 <script>
     // Fetch data from the server
@@ -41,6 +121,9 @@
                 properties.forEach(prop => {
                     const cell = document.createElement('td');
                     cell.textContent = team[prop]; // Fill the cell with the respective value
+                    if (prop === 'team_name') {
+                        cell.classList.add('team-name'); // Add a class for team names
+                    }
                     row.appendChild(cell);
                 });
 

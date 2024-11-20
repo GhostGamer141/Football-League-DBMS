@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Player Statistics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        form input, form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Update Player Statistics</h1>
+    <form id="update-player-stats">
+        <label for="playerId">Player ID:</label>
+        <input type="number" id="playerId" name="playerId" required />
+
+        <label for="matchId">Match ID:</label>
+        <input type="number" id="matchId" name="matchId" required />
+
+        <label for="goalsScored">Goals Scored:</label>
+        <input type="number" id="goalsScored" name="goalsScored" required />
+
+        <label for="assists">Assists:</label>
+        <input type="number" id="assists" name="assists" required />
+
+        <label for="yellowCards">Yellow Cards:</label>
+        <input type="number" id="yellowCards" name="yellowCards" required />
+
+        <label for="redCards">Red Cards:</label>
+        <input type="number" id="redCards" name="redCards" required />
+
+        <label for="tackles">Tackles:</label>
+        <input type="number" id="tackles" name="tackles" required />
+
+        <label for="healthStatus">Health Status:</label>
+        <select id="healthStatus" name="healthStatus" required>
+            <option value="Healthy">Healthy</option>
+            <option value="Injured">Injured</option>
+            <option value="Suspended">Suspended</option>
+        </select>
+
+        <button type="submit">Update Statistics</button>
+    </form>
+    <div class="message" id="message"></div>
+</div>
+
+<script>
+    document.getElementById("update-player-stats").addEventListener("submit", async function (e) {
+        e.preventDefault(); // Prevent form submission from reloading the page
+
+        const playerId = document.getElementById("playerId").value;
+        const matchId = document.getElementById("matchId").value;
+        const goalsScored = document.getElementById("goalsScored").value;
+        const assists = document.getElementById("assists").value;
+        const yellowCards = document.getElementById("yellowCards").value;
+        const redCards = document.getElementById("redCards").value;
+        const tackles = document.getElementById("tackles").value;
+        const healthStatus = document.getElementById("healthStatus").value;
+
+        const payload = {
+            playerId: parseInt(playerId),
+            matchId: parseInt(matchId),
+            goalsScored: parseInt(goalsScored),
+            assists: parseInt(assists),
+            yellowCards: parseInt(yellowCards),
+            redCards: parseInt(redCards),
+            tackles: parseInt(tackles),
+            healthStatus: healthStatus
+        };
+
+        try {
+            const response = await fetch("/update-player-stats", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            const result = await response.json();
+            const messageElement = document.getElementById("message");
+
+            if (response.ok) {
+                messageElement.textContent = result.message;
+                messageElement.style.color = "green";
+            } else {
+                messageElement.textContent = result.error;
+                messageElement.style.color = "red";
+            }
+        } catch (error) {
+            console.error("Error updating player statistics:", error);
+            document.getElementById("message").textContent = "An error occurred while updating statistics.";
+            document.getElementById("message").style.color = "red";
+        }
+    });
+</script>
+</body>
+</html>
