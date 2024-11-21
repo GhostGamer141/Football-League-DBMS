@@ -244,10 +244,17 @@ public class App {
 
             // Validate user credentials and retrieve role
             String role = validateUserCredentials(username, password);
-            if (role != null) {
+            if (role.equals("dba")) {
                 // Successful login - redirect to dashboard
                 ctx.redirect("/dashboard.html");
-            } else {
+            }else if(role.equals("team_manager")) {
+                // Successful login - redirect to dashboard
+                ctx.redirect("/team-manager.html");
+            }else if(role.equals("user")) {
+                // Successful login - redirect to dashboard
+                ctx.redirect("/user.html");
+
+            }else {
                 // Invalid login
                 ctx.status(401).result("Invalid credentials. Please try again.");
             }
