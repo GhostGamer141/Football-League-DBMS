@@ -1,5 +1,6 @@
 /* Place this in public/css/styles.css */
 body{
+
     background-size: 300% 300%;
     background-image: linear-gradient(45deg,black 0%,rgb(158, 38, 94) 100%);
     animation: bg-animation 7s infinite;
